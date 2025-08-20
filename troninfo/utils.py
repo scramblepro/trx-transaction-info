@@ -1,25 +1,14 @@
-import os
-from functools import lru_cache
 from tronpy import Tron
 from tronpy.providers import HTTPProvider
+import os
 
 
-@lru_cache(maxsize=1)
 def get_tron_client():
-    network = os.getenv("TRON_NETWORK", "mainnet")
-    fullnode = os.getenv("TRON_FULLNODE_URL") or None
-    solidity = os.getenv("TRON_SOLIDITYNODE_URL") or None
+    api_key = os.getenv("TRON_API_KEY")
+    if not api_key:
+        raise RuntimeError("TRON_API_KEY not set in environment")
 
-    if fullnode or solidity:
-        providers = {}
-        if fullnode:
-            providers["full_node"] = HTTPProvider(fullnode)
-        if solidity:
-            providers["solidity_node"] = HTTPProvider(solidity)
-        return Tron(network=network, **providers)
-
-    return Tron(network=network)
-
+    return Tron(HTTPProvider(api_key=api_key))
 
 
 
