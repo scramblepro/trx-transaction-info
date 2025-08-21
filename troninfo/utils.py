@@ -4,6 +4,11 @@ import os
 
 
 def get_tron_client():
+    """Возвращает клиент Tron, использующий TRON_API_KEY если он есть.
+    
+    Используется lru_cache, чтобы повторно не создавать клиента и не
+    переподключаться при каждом HTTP-запросе.
+    """
     api_key = os.getenv("TRON_API_KEY")
     if not api_key:
         raise RuntimeError("TRON_API_KEY not set in environment")
