@@ -71,6 +71,7 @@ cp .env.example .env
 
 TRON_API_KEY=ваш_ключ
 
+
 ## Быстрый старт (локально)
 bash-команды:
 
@@ -108,6 +109,7 @@ cd troninfo_project
 docker-compose up --build
 
 ## После запуска сервис будет доступен по адресу:
+
 http://127.0.0.1:8000/api/tron/tx/<txid>/
 
 
